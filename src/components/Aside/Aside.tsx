@@ -1,7 +1,7 @@
 import React from 'react'
-import { Logo } from '../Logo/Logo'
-import { UserPick } from '../UserPick/UserPick'
-import { ThemeChanger } from '../ThemeChager/ThemeChanger'
+import { Logo } from '../Logo'
+import { ThemeChanger } from '../ThemeChager'
+import { UserPick } from '../UserPick'
 
 
 export const Aside: React.FC = ():JSX.Element => {
