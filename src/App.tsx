@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
+import { Aside } from './components/Aside/Aside';
 
-function App() {
+export const App: React.FC = ():JSX.Element => {
   return (
-    <div className="App">
-     <h1 className="text-3xl font-bold underline text-red-400">
-      Hello world!
-    </h1>
+    <div className="App bg-gray-950 w-full h-screen">
+     <Aside />
     </div>
   );
 }
