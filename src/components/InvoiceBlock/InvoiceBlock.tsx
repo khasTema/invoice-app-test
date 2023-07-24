@@ -5,7 +5,6 @@ import { StatusBadge } from '../StatusBadge'
 import { Invoice } from '../../interface/interface'
 import { formatDate } from '../../utils/formatDate'
 
-
 interface InvoiceBlockProps {
     invoice: Invoice
 }
