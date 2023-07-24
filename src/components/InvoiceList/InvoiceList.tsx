@@ -8,11 +8,14 @@ export const InvoiceList:React.FC = ():JSX.Element => {
 
   const { data } = useContext(InvoiceDataContext)
  
-
-
   return (
     <>
-      {data && data.map((item: Invoice) => <InvoiceBlock key={item.id} invoice={item}/>)}
+      {data && data.map((item: Invoice) => 
+          <InvoiceBlock 
+              key={item.id} 
+              invoice={item}
+            />
+      )}
     </>
   )
 }

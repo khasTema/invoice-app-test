@@ -1,14 +1,16 @@
-import { createContext, ReactNode, useState, useEffect } from "react";
+import { createContext, ReactNode, useState, useEffect, useMemo } from "react";
 import { Invoice } from "../interface/interface";
 
 interface Context {
     data: Invoice[] | null,
-    isListShown: boolean
+    isListShown: boolean,
+    numberOfInvoices: number
 }
 
 export const InvoiceDataContext = createContext<Context>({
     data : null,
-    isListShown: false
+    isListShown: false,
+    numberOfInvoices: 0
 }) 
 
 interface ContextProps {
@@ -36,10 +38,13 @@ export const InvoiceDataContextProvider:React.FC<ContextProps> = ({children}) =>
       setTimeout(()=> getData(), 1000)  
     }, [])
 
+    const numberOfInvoices: number = useMemo(()=> data.length, [data] )
+
     return (
         <InvoiceDataContext.Provider value={{
             data,
-            isListShown
+            isListShown, 
+            numberOfInvoices
         }}>
             { children }
         </InvoiceDataContext.Provider>

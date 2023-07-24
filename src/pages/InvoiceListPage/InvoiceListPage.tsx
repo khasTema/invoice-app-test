@@ -13,7 +13,11 @@ export const InvoiceListPage:React.FC = ():JSX.Element => {
   return (
     <Wrapper>
         <Head />
-        {isListShown ? <InvoiceList /> :<EmptyPlaceholder />}
+        {
+          isListShown ? 
+          <InvoiceList /> 
+          : <EmptyPlaceholder />
+        }
     </Wrapper>
   )
 }
