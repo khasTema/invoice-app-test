@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import { Aside } from './components/Aside';
-import { InvoiceList } from './pages/InvoiceList';
+import { InvoiceListPage } from './pages/InvoiceListPage';
 import { InvoicePage } from './pages/InvocePage';
 import { Routes, Route } from "react-router-dom";
 
 export const App: React.FC = ():JSX.Element => {
   return (
-    <div className="App bg-gray-950 w-full h-screen flex justify-start items-start">
+    <div className="App bg-gray-950 w-full flex justify-start items-start relative">
      <Aside />
      <Routes>
-      <Route path='/' element={ <InvoiceList/> } />
+      <Route path='/' element={ <InvoiceListPage/> } />
       <Route path='/:id' element={ <InvoicePage/> } />
      </Routes>
     </div>
