@@ -5,6 +5,7 @@ import { ButtonDelete } from '../../Buttons/ButtonDelete'
 import { ButtonMarkStatus } from '../../Buttons/ButtonMarkStatus'
 import { InvoiceViewProps } from '../../../pages/InvoicePage/InvoicePage'
 import { InvoiceDataContext } from '../../../context/InvoiceDataContext'
+import { PENDING } from '../../../config/constants'
 
 
 export interface InvoiceIdProp {
@@ -22,10 +23,10 @@ export const InvoiceViewHead:React.FC<InvoiceViewProps> = ({currentInvoice}):JSX
         <span className='mr-2'>Status</span>
         <StatusBadge status={status}/>
       </div>
-      <div className='w-5/12 flex justify-between items-center pr-2'>
+      <div className='w-fit flex justify-between items-center pr-2'>
         <ButtonEdit invoiceId={id}/>
-        <ButtonDelete handleClick={handleToggleModal}/>
-        <ButtonMarkStatus invoiceId={id}/>
+        <ButtonDelete handleClick={handleToggleModal}/> 
+        {status === PENDING && <ButtonMarkStatus invoiceId={id}/>}
       </div>
     </div>
   )

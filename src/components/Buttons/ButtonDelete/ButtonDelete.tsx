@@ -8,7 +8,7 @@ export const ButtonDelete:React.FC<DeleteButtonProps> = ({handleClick}):JSX.Elem
 
   return (
     <button 
-      className='bg-red-500 hover:bg-opacity-70 rounded-3xl px-6 py-3 flex justify-between items-center transition-all'
+      className='bg-red-500 hover:bg-opacity-70 rounded-3xl px-6 py-3 flex justify-between items-center transition-all ml-2'
       onClick={handleClick}
     >
         <span>

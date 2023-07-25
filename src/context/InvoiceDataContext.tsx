@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState, useEffect, useMemo } from "react";
 import { Invoice } from "../interface/interface";
 import { useNavigate } from "react-router-dom";
+import { PAID, PENDING } from "../config/constants";
 
 interface Context {
     data: Invoice[] | null,
@@ -8,7 +9,8 @@ interface Context {
     numberOfInvoices: number
     handleDelete: (invoiceId: string) => void,
     isModalShown: boolean
-    handleToggleModal: () => void
+    handleToggleModal: () => void,
+    handleStatusChange: (invoiceId: string) => void
 }
 
 export const InvoiceDataContext = createContext<Context>({
@@ -17,7 +19,8 @@ export const InvoiceDataContext = createContext<Context>({
     numberOfInvoices: 0,
     handleDelete: (invoiceId) => {},
     isModalShown: false,
-    handleToggleModal: () => {}
+    handleToggleModal: () => {},
+    handleStatusChange: () => {}
 }) 
 
 interface ContextProps {
@@ -28,7 +31,8 @@ export const InvoiceDataContextProvider:React.FC<ContextProps> = ({children}) =>
 
     const [ data, setData ] = useState<Invoice[]>([])
     const [ isListShown, setIsListShown ] = useState<boolean>(false)
-    console.log(data)
+    const [ isModalShown, setIsModalShown ] = useState<boolean>(false)
+    const navigate = useNavigate()
   
     useEffect(()=> {
       const getData = async () =>  {
@@ -47,21 +51,34 @@ export const InvoiceDataContextProvider:React.FC<ContextProps> = ({children}) =>
 
     const numberOfInvoices: number = useMemo(()=> data.length, [data] )
 
-    const navigate = useNavigate()
-
     const handleDelete = (invoiceId: string):void => {
-        console.log('dlete from the context')
         const updatedData = [...data].filter(invoice => invoice.id !== invoiceId)
         setData(updatedData)
+        setIsModalShown(prev => !prev)
         setTimeout(() => navigate('/'), 1000)
     }
 
     // Modal function
-    const [ isModalShown, setIsModalShown ] = useState<boolean>(true) 
-
     const handleToggleModal = ():void => {
         setIsModalShown(prev => !prev)
     }
+    
+    //invoice status updating
+    const handleStatusChange = (invoiceId: string): void => {
+        const itemIndex = data.findIndex(item => item.id === invoiceId);
+        if (itemIndex !== -1) {
+            const currentStatus = data[itemIndex].status;
+        
+            if (currentStatus === PENDING) {
+                const updatedData = [...data];
+                updatedData[itemIndex] = {
+                    ...updatedData[itemIndex],
+                    status: PAID,
+            };
+                setData(updatedData);
+            }
+        }
+    };
 
     return (
         <InvoiceDataContext.Provider value={{
@@ -70,7 +87,8 @@ export const InvoiceDataContextProvider:React.FC<ContextProps> = ({children}) =>
             numberOfInvoices,
             handleDelete,
             isModalShown,
-            handleToggleModal
+            handleToggleModal,
+            handleStatusChange
         }}>
             { children }
         </InvoiceDataContext.Provider>
