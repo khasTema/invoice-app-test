@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ButtonNew } from '../ButtonNew/ButtonNew'
+import { ButtonNew } from '../Buttons/ButtonNew/ButtonNew'
 import { Filter } from '../Filter'
 import { InvoiceDataContext } from '../../context/InvoiceDataContext'
 

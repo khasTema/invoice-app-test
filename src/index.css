@@ -11,6 +11,28 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #000;
   font-family: 'League Spartan', sans-serif;
   color: #f8f8fb;
+}
+
+/* Scroll bar style */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(124,58,237);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(31,41,55);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

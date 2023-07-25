@@ -1,0 +1,1 @@
+export { InvoiceViewHead } from "./InvoiceViewHead";

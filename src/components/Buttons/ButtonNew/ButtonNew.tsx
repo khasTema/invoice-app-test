@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactComponent as Plus } from '../../assets/icon-plus.svg'
+import { ReactComponent as Plus } from '../../../assets/icon-plus.svg'
 
 export const ButtonNew:React.FC = ():JSX.Element => {
   return (
