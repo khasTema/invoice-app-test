@@ -5,7 +5,9 @@
             'invoiceId ... sender'
             'invoiceDate client mail'
             'invoiceDueDate client mail';
-    gap: 2rem;
+    column-gap: 2rem;
+    row-gap: 1rem;
+    margin-bottom: 3rem;
 }
 
 .invoiceId { grid-area: invoiceId; }
@@ -19,6 +21,7 @@
     font-weight: 700;
     font-size: 1.2rem;
     margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .grid span {
