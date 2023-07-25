@@ -3,12 +3,15 @@ import { ReactNode } from "react"
 
 export interface IContext {
     data: Invoice[] | null,
+    filteredData: Invoice[] | null,
     isListShown: boolean,
     numberOfInvoices: number
     handleDelete: (invoiceId: string) => void,
     isModalShown: boolean
     handleToggleModal: () => void,
-    handleStatusChange: (invoiceId: string) => void
+    handleStatusChange: (invoiceId: string) => void,
+    handleStatusFilter: (status: string) => void,
+    handleClearFilter: () => void
 }
 
 export interface IContextProps {

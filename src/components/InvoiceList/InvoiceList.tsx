@@ -6,11 +6,12 @@ import { InvoiceDataContext } from '../../context/InvoiceDataContext'
 
 export const InvoiceList:React.FC = ():JSX.Element => {
 
-  const { data } = useContext(InvoiceDataContext)
+  const { data, filteredData } = useContext(InvoiceDataContext)
+  const renderedData = filteredData?.length ? filteredData : data
  
   return (
     <>
-      {data && data.map((item: Invoice) => 
+      {renderedData && renderedData.map((item: Invoice) => 
           <InvoiceBlock 
               key={item.id} 
               invoice={item}

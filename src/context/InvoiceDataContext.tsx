@@ -6,17 +6,21 @@ import { IContext, IContextProps } from './interface'
 
 export const InvoiceDataContext = createContext<IContext>({
     data : null,
+    filteredData: null,
     isListShown: false,
     numberOfInvoices: 0,
     handleDelete: (invoiceId) => {},
     isModalShown: false,
     handleToggleModal: () => {},
-    handleStatusChange: () => {}
+    handleStatusChange: () => {},
+    handleStatusFilter: () => {},
+    handleClearFilter: () => {}
 }) 
 
 export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) => {
 
     const [ data, setData ] = useState<Invoice[]>([])
+    const [ filteredData, setFilteredData ] = useState<Invoice[]>([])
     const [ isListShown, setIsListShown ] = useState<boolean>(false)
     const [ isModalShown, setIsModalShown ] = useState<boolean>(false)
     const navigate = useNavigate()
@@ -70,15 +74,28 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         }
     };
 
+    // filtering
+    const handleStatusFilter = (status: string) => {
+        const updatedData = [...data].filter(item => item.status === status)
+        setFilteredData(updatedData)
+    }
+
+    const handleClearFilter = () => {
+        setFilteredData([])
+    }
+
     return (
         <InvoiceDataContext.Provider value={{
             data,
+            filteredData,
             isListShown, 
             numberOfInvoices,
             handleDelete,
             isModalShown,
             handleToggleModal,
-            handleStatusChange
+            handleStatusChange,
+            handleStatusFilter,
+            handleClearFilter
         }}>
             { children }
         </InvoiceDataContext.Provider>
