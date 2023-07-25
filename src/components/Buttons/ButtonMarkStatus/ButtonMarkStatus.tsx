@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { InvoiceIdProp } from '../../InvoiceView/InvoiceViewHead/InvoiceViewHead'
 import { InvoiceDataContext } from '../../../context/InvoiceDataContext'
+import { InvoiceIdProp } from '../../../interface/interface'
 
 
 export const ButtonMarkStatus:React.FC<InvoiceIdProp> = ({invoiceId}):JSX.Element => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { InvoiceIdProp } from '../../InvoiceView/InvoiceViewHead/InvoiceViewHead'
+import { InvoiceIdProp } from '../../../interface/interface'
 
 
 export const ButtonEdit:React.FC<InvoiceIdProp> = ({invoiceId}):JSX.Element => {

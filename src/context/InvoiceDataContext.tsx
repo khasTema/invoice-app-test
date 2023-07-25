@@ -1,19 +1,10 @@
-import { createContext, ReactNode, useState, useEffect, useMemo } from "react";
+import { createContext, useState, useEffect, useMemo } from "react";
 import { Invoice } from "../interface/interface";
 import { useNavigate } from "react-router-dom";
 import { PAID, PENDING } from "../config/constants";
+import { IContext, IContextProps } from './interface'
 
-interface Context {
-    data: Invoice[] | null,
-    isListShown: boolean,
-    numberOfInvoices: number
-    handleDelete: (invoiceId: string) => void,
-    isModalShown: boolean
-    handleToggleModal: () => void,
-    handleStatusChange: (invoiceId: string) => void
-}
-
-export const InvoiceDataContext = createContext<Context>({
+export const InvoiceDataContext = createContext<IContext>({
     data : null,
     isListShown: false,
     numberOfInvoices: 0,
@@ -23,11 +14,7 @@ export const InvoiceDataContext = createContext<Context>({
     handleStatusChange: () => {}
 }) 
 
-interface ContextProps {
-    children: ReactNode
-}
-
-export const InvoiceDataContextProvider:React.FC<ContextProps> = ({children}) => {
+export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) => {
 
     const [ data, setData ] = useState<Invoice[]>([])
     const [ isListShown, setIsListShown ] = useState<boolean>(false)

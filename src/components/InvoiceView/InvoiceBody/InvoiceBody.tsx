@@ -2,7 +2,7 @@ import React from 'react'
 import { InvoiceDetailsGrid } from '../IvoiceDetailsGrid'
 import { InvoiceItemList } from '../InvoiceItemList'
 import { InvoiceTotal } from '../InvoiceTotal'
-import { InvoiceViewProps } from '../../../pages/InvoicePage/InvoicePage'
+import { InvoiceViewProps } from '../../../interface/interface'
 
 export const InvoiceBody:React.FC<InvoiceViewProps> = ({currentInvoice}):JSX.Element => {
   return (

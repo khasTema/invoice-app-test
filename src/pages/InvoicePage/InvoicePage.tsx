@@ -4,15 +4,10 @@ import { Wrapper } from '../../components/Wrapper'
 import { InvoiceViewHead } from '../../components/InvoiceView/InvoiceViewHead'
 import { InvoiceBody } from '../../components/InvoiceView/InvoiceBody'
 import { InvoiceDataContext } from '../../context/InvoiceDataContext'
-import { Invoice } from '../../interface/interface'
 import { EmptyPlaceholder } from '../../components/EmptyPlaceholder'
 import { DelConfirmModal } from '../../components/InvoiceView/DelConfirmModal'
 import { ReactComponent as LeftArrow } from '../../assets/icon-arrow-left.svg'
 import { useCurrentInvoice } from '../../hooks/useCurrentInvoice'
-
-export interface InvoiceViewProps {
-  currentInvoice: Invoice,
-}
 
 export const InvoicePage:React.FC = ():JSX.Element => {
 

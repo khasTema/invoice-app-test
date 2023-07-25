@@ -26,3 +26,23 @@ export interface Invoice {
     postCode: string;
     country: string;
   }
+
+  export interface InvoiceBlockProps {
+    invoice: Invoice
+}
+
+export interface ItemProps {
+  item: Item
+}
+
+export interface InvoiceIdProp {
+  invoiceId: string 
+}
+
+export interface InvoiceViewProps {
+  currentInvoice: Invoice,
+}
+
+export interface BadgeStatusProp {
+  status: string
+}

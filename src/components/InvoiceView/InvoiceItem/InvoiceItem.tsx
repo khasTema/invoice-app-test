@@ -1,10 +1,6 @@
 import React from 'react'
 import { CURRENCY_SYMBOL } from '../../../config/constants'
-import { Item } from '../../../interface/interface'
-
-interface ItemProps {
-  item: Item
-}
+import { ItemProps } from '../../../interface/interface'
 
 export const InvoiceItem:React.FC<ItemProps> = ({item}):JSX.Element => {
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { CURRENCY_SYMBOL } from '../../../config/constants'
-import { InvoiceViewProps } from '../../../pages/InvoicePage/InvoicePage'
+import { InvoiceViewProps } from '../../../interface/interface'
 
 export const InvoiceTotal:React.FC<InvoiceViewProps> = ({currentInvoice}):JSX.Element => {
 

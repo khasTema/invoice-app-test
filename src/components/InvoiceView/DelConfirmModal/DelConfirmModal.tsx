@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { ButtonDelete } from '../../Buttons/ButtonDelete'
 import { InvoiceDataContext } from '../../../context/InvoiceDataContext'
-import { InvoiceIdProp } from '../InvoiceViewHead/InvoiceViewHead'
+import { InvoiceIdProp } from '../../../interface/interface'
 
 export const DelConfirmModal:React.FC<InvoiceIdProp> = ({invoiceId}):JSX.Element => {
 

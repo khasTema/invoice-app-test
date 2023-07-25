@@ -2,13 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ReactComponent as RightArrow } from '../../assets/icon-arrow-right.svg'
 import { StatusBadge } from '../StatusBadge'
-import { Invoice } from '../../interface/interface'
 import { formatDate } from '../../utils/formatDate'
 import { CURRENCY_SYMBOL } from '../../config/constants'
-
-interface InvoiceBlockProps {
-    invoice: Invoice
-}
+import { InvoiceBlockProps } from '../../interface/interface'
 
 export const InvoiceBlock:React.FC<InvoiceBlockProps> = ({invoice}):JSX.Element => {
 

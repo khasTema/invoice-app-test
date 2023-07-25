@@ -1,6 +1,6 @@
 import React from 'react'
 import { InvoiceItem } from '../InvoiceItem/InvoiceItem'
-import { InvoiceViewProps } from '../../../pages/InvoicePage/InvoicePage'
+import { InvoiceViewProps } from '../../../interface/interface'
 
 export const InvoiceItemList:React.FC<InvoiceViewProps> = ({currentInvoice}):JSX.Element => {
 

@@ -3,14 +3,9 @@ import { StatusBadge } from '../../StatusBadge'
 import { ButtonEdit } from '../../Buttons/ButtonEdit'
 import { ButtonDelete } from '../../Buttons/ButtonDelete'
 import { ButtonMarkStatus } from '../../Buttons/ButtonMarkStatus'
-import { InvoiceViewProps } from '../../../pages/InvoicePage/InvoicePage'
 import { InvoiceDataContext } from '../../../context/InvoiceDataContext'
 import { PENDING } from '../../../config/constants'
-
-
-export interface InvoiceIdProp {
-  invoiceId: string 
-}
+import { InvoiceViewProps } from '../../../interface/interface'
 
 export const InvoiceViewHead:React.FC<InvoiceViewProps> = ({currentInvoice}):JSX.Element => {
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './grid.module.css'
-import { InvoiceViewProps } from '../../../pages/InvoicePage/InvoicePage'
 import { formatDate } from '../../../utils/formatDate'
+import { InvoiceViewProps } from '../../../interface/interface'
 
 
 export const InvoiceDetailsGrid:React.FC<InvoiceViewProps> = ({currentInvoice}):JSX.Element => {
