@@ -6,6 +6,7 @@ import { InvoiceBody } from '../../components/InvoiceView/InvoiceBody'
 import { InvoiceDataContext } from '../../context/InvoiceDataContext'
 import { Invoice } from '../../interface/interface'
 import { EmptyPlaceholder } from '../../components/EmptyPlaceholder'
+import { DelConfirmModal } from '../../components/InvoiceView/DelConfirmModal'
 
 export interface InvoiceViewProps {
   currentInvoice: Invoice,
@@ -13,11 +14,9 @@ export interface InvoiceViewProps {
 
 export const InvoicePage:React.FC = ():JSX.Element => {
 
-  const {id} = useParams()
-  const {data} = useContext(InvoiceDataContext)
-
+  const { id } = useParams()
+  const {data, isModalShown} = useContext(InvoiceDataContext)
   const [ currentInvoice, setCurrentInvoice ] = useState<Invoice>();
-  console.log(currentInvoice)
 
   useEffect(() => {
     let invoice = data?.find(item => item.id === id)
@@ -25,18 +24,22 @@ export const InvoicePage:React.FC = ():JSX.Element => {
   },[id, data])
 
   return (
-    <Wrapper>
-      { currentInvoice ?
-        <>
-          <InvoiceViewHead currentInvoice={currentInvoice} />
-          <InvoiceBody currentInvoice={currentInvoice} />
-        </>
-        :
-        <>
-          <EmptyPlaceholder />
-        </>
-      }
-     
-    </Wrapper>
+    <>
+      <Wrapper>
+        { currentInvoice ?
+          <>
+            <InvoiceViewHead currentInvoice={currentInvoice} />
+            <InvoiceBody currentInvoice={currentInvoice} />
+            
+          </>
+          :
+          <>
+            <EmptyPlaceholder />
+          </>
+        }
+      
+      </Wrapper>
+      {isModalShown && <DelConfirmModal invoiceId={id!}/>}
+    </>
   )
 }

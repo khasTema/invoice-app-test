@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StatusBadge } from '../../StatusBadge'
 import { ButtonEdit } from '../../Buttons/ButtonEdit'
 import { ButtonDelete } from '../../Buttons/ButtonDelete'
 import { ButtonMarkStatus } from '../../Buttons/ButtonMarkStatus'
 import { InvoiceViewProps } from '../../../pages/InvoicePage/InvoicePage'
+import { InvoiceDataContext } from '../../../context/InvoiceDataContext'
 
 
+export interface InvoiceIdProp {
+  invoiceId: string 
+}
 
 export const InvoiceViewHead:React.FC<InvoiceViewProps> = ({currentInvoice}):JSX.Element => {
 
-  const {status} = currentInvoice
+  const {status, id} = currentInvoice
+  const {handleToggleModal} = useContext(InvoiceDataContext)
 
   return (
     <div className='w-full bg-gray-800 p-4 mb-6 rounded-lg flex justify-between items-center relative'>
@@ -18,9 +23,9 @@ export const InvoiceViewHead:React.FC<InvoiceViewProps> = ({currentInvoice}):JSX
         <StatusBadge status={status}/>
       </div>
       <div className='w-5/12 flex justify-between items-center pr-2'>
-        <ButtonEdit />
-        <ButtonDelete />
-        <ButtonMarkStatus />
+        <ButtonEdit invoiceId={id}/>
+        <ButtonDelete handleClick={handleToggleModal}/>
+        <ButtonMarkStatus invoiceId={id}/>
       </div>
     </div>
   )
