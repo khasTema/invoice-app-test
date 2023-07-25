@@ -1,41 +1,50 @@
 import React from 'react'
 import styles from './grid.module.css'
+import { InvoiceViewProps } from '../../../pages/InvoicePage/InvoicePage'
+import { formatDate } from '../../../utils/formatDate'
 
-export const InvoiceDetailsGrid:React.FC = ():JSX.Element => {
+
+export const InvoiceDetailsGrid:React.FC<InvoiceViewProps> = ({currentInvoice}):JSX.Element => {
+
+    const { id, description, senderAddress, paymentDue, createdAt, clientAddress, clientName, clientEmail } = currentInvoice
+
+    const formatedCreateDate = formatDate(createdAt)
+    const formatedDueDate = formatDate(paymentDue)
+
   return (
     <div className={styles.grid}>
         <div className={styles.invoiceId}>
             <p>
                 <span className='text-gray-400'>#</span>
-                {'RT678906'}
+                {id}
             </p>
-            <span>{'Graphic Design'}</span>
+            <span>{description}</span>
         </div>
         <div className={styles.sender}>
-            <span>{'18 Union street'}</span>
-            <span>{'London'}</span>
-            <span>{'EI 6578'}</span>
-            <span>{'United Kingdom'}</span>
+            <span>{senderAddress.street}</span>
+            <span>{senderAddress.city}</span>
+            <span>{senderAddress.postCode}</span>
+            <span>{senderAddress.country}</span>
         </div>
         <div className={styles.invoiceDate}>
             <span>Invoice Date</span>
-            <p>{'21 Aug 2023'}</p>
+            <p>{formatedCreateDate}</p>
         </div>
         <div className={styles.invoiceDueDate}>
             <span>Payment Date</span>
-            <p>{'21 Aug 2023'}</p>
+            <p>{formatedDueDate}</p>
         </div>
         <div className={styles.client}>
             <span>Bill to</span>
-            <p>{'John Doe'}</p>
-            <span>{'18 Union street'}</span>
-            <span>{'London'}</span>
-            <span>{'EI 6578'}</span>
-            <span>{'United Kingdom'}</span>
+            <p>{clientName}</p>
+            <span>{clientAddress.street}</span>
+            <span>{clientAddress.city}</span>
+            <span>{clientAddress.postCode}</span>
+            <span>{clientAddress.country}</span>
         </div>
         <div className={styles.mail}>
             <span>Sent to</span>
-            <p>{'some@some.com'}</p>
+            <p>{clientEmail}</p>
         </div>
     </div>
   )
