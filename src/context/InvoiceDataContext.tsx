@@ -14,7 +14,9 @@ export const InvoiceDataContext = createContext<IContext>({
     handleToggleModal: () => {},
     handleStatusChange: () => {},
     handleStatusFilter: () => {},
-    handleClearFilter: () => {}
+    handleClearFilter: () => {},
+    isFormModalShown: false,
+    handleTogleFormModal: () => {}
 }) 
 
 export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) => {
@@ -23,6 +25,7 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
     const [ filteredData, setFilteredData ] = useState<Invoice[]>([])
     const [ isListShown, setIsListShown ] = useState<boolean>(false)
     const [ isModalShown, setIsModalShown ] = useState<boolean>(false)
+    const [ isFormModalShown, setIsFormModalSHown ] = useState<boolean>(false)
     const navigate = useNavigate()
 
     // getting initila data
@@ -84,6 +87,13 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         setFilteredData([])
     }
 
+    // form modal
+    const handleTogleFormModal = () => {
+        console.log('yay yay')
+        setIsFormModalSHown(prev => !prev)
+        console.log(isFormModalShown)
+    }
+
     return (
         <InvoiceDataContext.Provider value={{
             data,
@@ -95,7 +105,9 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
             handleToggleModal,
             handleStatusChange,
             handleStatusFilter,
-            handleClearFilter
+            handleClearFilter,
+            isFormModalShown,
+            handleTogleFormModal
         }}>
             { children }
         </InvoiceDataContext.Provider>

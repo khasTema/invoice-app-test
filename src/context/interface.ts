@@ -11,7 +11,9 @@ export interface IContext {
     handleToggleModal: () => void,
     handleStatusChange: (invoiceId: string) => void,
     handleStatusFilter: (status: string) => void,
-    handleClearFilter: () => void
+    handleClearFilter: () => void,
+    isFormModalShown: boolean,
+    handleTogleFormModal: () => void
 }
 
 export interface IContextProps {

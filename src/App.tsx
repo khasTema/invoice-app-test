@@ -7,8 +7,9 @@ import { Routes, Route } from "react-router-dom";
 import { InvoiceDataContextProvider } from './context/InvoiceDataContext';
 
 export const App: React.FC = ():JSX.Element => {
+
   return (
-    <div className="App bg-gray-950 w-full flex justify-start items-start relative">
+    <div className="App bg-gray-950 w-full flex justify-start items-start relative overflow-x-hidden">
       <InvoiceDataContextProvider>
         <Aside />
         <Routes>
