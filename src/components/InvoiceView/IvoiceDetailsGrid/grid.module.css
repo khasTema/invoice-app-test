@@ -1,0 +1,36 @@
+.grid {
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+            'invoiceId ... sender'
+            'invoiceDate client mail'
+            'invoiceDueDate client mail';
+    gap: 2rem;
+}
+
+.invoiceId { grid-area: invoiceId; }
+.sender { grid-area: sender; }
+.invoiceDate { grid-area: invoiceDate; }
+.invoiceDueDate { grid-area: invoiceDueDate; }
+.client { grid-area: client; }
+.mail { grid-area: mail; }
+
+.grid p {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-top: 8px;
+}
+
+.grid span {
+    display: block;
+    font-size: .75rem;
+}
+
+.grid p span {
+    display: inline;
+    font-size: 1.2rem;
+}
+
+.sender {
+    text-align: right;
+}

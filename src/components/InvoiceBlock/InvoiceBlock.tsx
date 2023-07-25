@@ -4,6 +4,7 @@ import { ReactComponent as RightArrow } from '../../assets/icon-arrow-right.svg'
 import { StatusBadge } from '../StatusBadge'
 import { Invoice } from '../../interface/interface'
 import { formatDate } from '../../utils/formatDate'
+import { CURRENCY_SYMBOL } from '../../config/constants'
 
 interface InvoiceBlockProps {
     invoice: Invoice
@@ -13,8 +14,6 @@ export const InvoiceBlock:React.FC<InvoiceBlockProps> = ({invoice}):JSX.Element 
 
     const {id, paymentDue, clientName, total, status} = invoice
     const dueDate = formatDate(paymentDue)
-
-    const currencySymbol: string = '£'
 
   return (
     <Link to={`/${id}`} className='w-full bg-gray-800 p-4 mb-3 rounded-lg hover:bg-gray-600 grid grid-cols-5 gap-5 items-center relative'>
@@ -29,7 +28,7 @@ export const InvoiceBlock:React.FC<InvoiceBlockProps> = ({invoice}):JSX.Element 
             {clientName}
         </div>
         <div className="invoice-ammount font-bold tracking-wider self-center place-self-end pr-8">
-            {currencySymbol}{total.toFixed(2)}
+            {CURRENCY_SYMBOL}{total.toFixed(2)}
         </div>
         <StatusBadge status={status}/>
         <div className='absolute right-3'>

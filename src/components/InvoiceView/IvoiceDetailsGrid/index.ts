@@ -1,0 +1,1 @@
+export { InvoiceDetailsGrid } from "./InvoiceDetailsGrid";
