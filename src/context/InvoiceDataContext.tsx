@@ -33,24 +33,27 @@ export const InvoiceDataContextProvider:React.FC<ContextProps> = ({children}) =>
     const [ isListShown, setIsListShown ] = useState<boolean>(false)
     const [ isModalShown, setIsModalShown ] = useState<boolean>(false)
     const navigate = useNavigate()
-  
+
+    // getting initila data
     useEffect(()=> {
-      const getData = async () =>  {
-        try {
-          const res = await fetch('data/data.json');
-          const json = await res.json()
-          setData(json)
-          setIsListShown(true)
-          } catch (error) {
-            console.error('Error fetching data:', error);
-            setIsListShown(false)
-          }
-      };
-      setTimeout(()=> getData(), 1000)  
+        const getData = async () =>  {
+            try {
+                const res = await fetch('data/data.json');
+                const json = await res.json()
+                setData(json)
+                setIsListShown(true)
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setIsListShown(false)
+            }
+        };
+            setTimeout(()=> getData(), 1000)  
     }, [])
 
+    // counting number of invoices
     const numberOfInvoices: number = useMemo(()=> data.length, [data] )
 
+    // delete function fired from modal
     const handleDelete = (invoiceId: string):void => {
         const updatedData = [...data].filter(invoice => invoice.id !== invoiceId)
         setData(updatedData)
