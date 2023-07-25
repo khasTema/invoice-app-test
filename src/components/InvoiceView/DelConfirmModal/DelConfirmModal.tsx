@@ -12,7 +12,7 @@ export const DelConfirmModal:React.FC<InvoiceIdProp> = ({invoiceId}):JSX.Element
     }
 
   return (
-    <div className='absolute w-full h-screen bg-black z-50 t-0 l-0 bg-opacity-60 flex justify-center items-center'>
+    <div className='fixed w-full h-screen bg-black z-50 t-0 l-0 bg-opacity-60 flex justify-center items-center'>
         <div className='w-6/12 p-12 bg-slate-700 rounded-xl'>
             <h3 className='font-bold text-3xl'>Confirm Deletion</h3>
             <p>Are you sure you want to delete invoice <span>#</span>{invoiceId}? This action cannot be undone. </p>

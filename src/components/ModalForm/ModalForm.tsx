@@ -11,7 +11,7 @@ export const ModalForm:React.FC = ():JSX.Element => {
     const error: boolean = false
 
   return (
-    <div className='absolute top-0 left-20 w-full h-screen bg-black bg-opacity-60 flex justify-start items-start overflow-hidden'>
+    <div className='fixed top-0 left-20 w-full h-screen bg-black bg-opacity-60 flex justify-start items-start overflow-y-scroll overflow-x-hidden'>
          <form className='w-2/5 bg-slate-800 p-8 overflow-y-auto'>
            { isNew ? <NewInvoiceHead /> : <EditInvoiceHead />}
            <span className='text-violet-700 text-xs block mb-2'>Bill From</span>
