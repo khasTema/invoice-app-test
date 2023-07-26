@@ -62,9 +62,6 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
           }));
       };
 
-    const getItemTotal = ():number => {
-        return newInvoiceItems[0].quantity * newInvoiceItems[0].price
-    }
 
     const [ newInvoiceItems, setNewInvoiceItems ] = useState<Item[]>([
         {
@@ -74,6 +71,14 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
             total: 0 
         }
     ])
+
+    const handleInvoiceItemsChange = (index: number, field: string, value: string | number): void => {
+        // Update the specific field for the item at the given index
+        // const { value } = event.target;
+        const updatedItems = [...newInvoiceItems];
+        updatedItems[index] = { ...updatedItems[index], [field]: value };
+        setNewInvoiceItems(updatedItems);
+      };
 
     const addNewItem = ():void => {
         const newItem = {
@@ -178,6 +183,7 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
                 itemsArr={newInvoiceItems}
                 addNewItem={addNewItem}
                 removeItem={removeItem}
+                handleChange={handleInvoiceItemsChange}
             />
            </div>
            <FormInvoiceButtons isEditForm={isEditForm} />

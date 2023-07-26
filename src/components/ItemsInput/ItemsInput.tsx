@@ -8,9 +8,10 @@ interface IitemsInputProps {
     itemsArr: Item[]
     addNewItem: () => void
     removeItem: (index: number) => void
+    handleChange: (index: number, field: string, value: string | number) => void;
 }
 
-export const ItemsInput:React.FC<IitemsInputProps> = ({itemsArr, addNewItem, removeItem}):JSX.Element => {
+export const ItemsInput:React.FC<IitemsInputProps> = ({itemsArr, addNewItem, removeItem, handleChange}):JSX.Element => {
 
     // const [ itemsCount, setItemsCount ] = useState<number>(1)
     const handleAddItemInput = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>):void => {
@@ -41,6 +42,7 @@ export const ItemsInput:React.FC<IitemsInputProps> = ({itemsArr, addNewItem, rem
                             description=''
                             value={item.name}
                             error={false}
+                            handleChange={(e) => handleChange(index, 'name', e.target.value)}
                         />
                     </div>
                     <div className='w-1/12'>
@@ -49,6 +51,7 @@ export const ItemsInput:React.FC<IitemsInputProps> = ({itemsArr, addNewItem, rem
                             description=''
                             value={item.quantity}
                             error={false}
+                            handleChange={(e) => handleChange(index, 'quantity', e.target.value)}
                         />
                     </div>
                     <div className='w-2/12'>
@@ -57,6 +60,7 @@ export const ItemsInput:React.FC<IitemsInputProps> = ({itemsArr, addNewItem, rem
                             description=''
                             value={item.price}
                             error={false}
+                            handleChange={(e) => handleChange(index, 'price', e.target.value)}
                         />
                     </div>
                     <div className='w-1/12 text-sm -translate-y-1'>{CURRENCY_SYMBOL}{item.total}</div>
