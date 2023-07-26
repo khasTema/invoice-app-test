@@ -6,13 +6,18 @@ import { InvoiceDataContext } from '../../context/InvoiceDataContext';
 
 export const Logo:React.FC = ():JSX.Element => {
 
-  const { handleClearFilter } = useContext(InvoiceDataContext)
+  const { handleClearFilter, handleCloseModalForm } = useContext(InvoiceDataContext)
+
+  const handleClick = ():void => {
+    handleCloseModalForm()
+    handleClearFilter()
+  }
 
   return (
     <Link 
       to='/' 
       className='logo bg-violet-600 rounded-r-xl w-full h-20 flex justify-end items-end cursor-pointer mb-auto relative'
-      onClick={handleClearFilter}
+      onClick={handleClick}
       title='Reload the List'
     >
       <div className='h-1/2 w-full bg-violet-400 rounded-tl-xl'></div>

@@ -13,7 +13,8 @@ export interface IContext {
     handleStatusFilter: (status: string) => void,
     handleClearFilter: () => void,
     isFormModalShown: boolean,
-    handleTogleFormModal: () => void
+    handleTogleFormModal: () => void,
+    handleCloseModalForm: () => void
 }
 
 export interface IContextProps {

@@ -16,7 +16,8 @@ export const InvoiceDataContext = createContext<IContext>({
     handleStatusFilter: () => {},
     handleClearFilter: () => {},
     isFormModalShown: false,
-    handleTogleFormModal: () => {}
+    handleTogleFormModal: () => {},
+    handleCloseModalForm: () => {}
 }) 
 
 export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) => {
@@ -94,6 +95,12 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         console.log(isFormModalShown)
     }
 
+    // TEMPORARY FUNCTION chek it later if it is needed and decide what to do
+    // for now it closes modal when logo is clicked
+    const handleCloseModalForm = () => {
+        setIsFormModalSHown(false)
+    }
+
     return (
         <InvoiceDataContext.Provider value={{
             data,
@@ -107,7 +114,8 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
             handleStatusFilter,
             handleClearFilter,
             isFormModalShown,
-            handleTogleFormModal
+            handleTogleFormModal,
+            handleCloseModalForm
         }}>
             { children }
         </InvoiceDataContext.Provider>

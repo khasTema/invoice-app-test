@@ -8,11 +8,12 @@ import { EmptyPlaceholder } from '../../components/EmptyPlaceholder'
 import { DelConfirmModal } from '../../components/InvoiceView/DelConfirmModal'
 import { ReactComponent as LeftArrow } from '../../assets/icon-arrow-left.svg'
 import { useCurrentInvoice } from '../../hooks/useCurrentInvoice'
+import { ModalForm } from '../../components/ModalForm'
 
 export const InvoicePage:React.FC = ():JSX.Element => {
 
   const { id } = useParams()
-  const { isModalShown } = useContext(InvoiceDataContext)
+  const { isModalShown, isFormModalShown } = useContext(InvoiceDataContext)
   const { currentInvoice } = useCurrentInvoice({id})
 
   return (
@@ -36,6 +37,7 @@ export const InvoicePage:React.FC = ():JSX.Element => {
       
       </Wrapper>
       {isModalShown && <DelConfirmModal invoiceId={id!}/>}
+      {isFormModalShown && <ModalForm invoiceId={id!}/>}
     </>
   )
 }

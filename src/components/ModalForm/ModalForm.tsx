@@ -4,16 +4,25 @@ import { EditInvoiceHead } from './EditInvoiceHead'
 import { InputField } from '../InputField'
 import { AddressInputs } from '../AddressInput'
 import { DatePicker } from '../DatePicker'
+import { ItemsInput } from '../ItemsInput'
+import { FormInvoiceButtons } from './FormInvoiceButtons'
 
-export const ModalForm:React.FC = ():JSX.Element => {
+export interface IModalFormProps {
+    invoiceId?: string
+}
 
-    const isNew: boolean = true
+export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => {
+
+    const isEditForm: boolean = !!invoiceId 
     const error: boolean = false
 
   return (
     <div className='fixed top-0 left-20 w-full h-screen bg-black bg-opacity-60 flex justify-start items-start overflow-y-scroll overflow-x-hidden'>
          <form className='w-2/5 bg-slate-800 p-8 overflow-y-auto'>
-           { isNew ? <NewInvoiceHead /> : <EditInvoiceHead />}
+           { isEditForm? 
+                <EditInvoiceHead  invoiceId={invoiceId}/>  
+                : <NewInvoiceHead /> 
+            }
            <span className='text-violet-700 text-xs block mb-2'>Bill From</span>
            <AddressInputs 
                 street={'street'}
@@ -53,6 +62,10 @@ export const ModalForm:React.FC = ():JSX.Element => {
                     error={error}
                 />
            </div>
+           <div className="px-2">
+            <ItemsInput />
+           </div>
+           <FormInvoiceButtons isEditForm={isEditForm} />
          </form>
     </div>
   )
