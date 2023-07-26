@@ -4,45 +4,57 @@ import { InputField } from '../InputField'
 interface IaddressInputProps {
     street: string,
     city: string,
-    postcode: string,
+    postCode: string,
     country: string,
     error: boolean
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const AddressInputs:React.FC<IaddressInputProps> = ({street, city,postcode, country, error}):JSX.Element => {
+export const AddressInputs:React.FC<IaddressInputProps> = ({
+    street, 
+    city, 
+    postCode, 
+    country, 
+    error, 
+    handleChange
+}):JSX.Element => {
   return (
     <div>
         <div className='px-2'>
             <InputField 
-                name={street} 
+                name={'street'}
                 description={"Street Addres"} 
-                value={''} 
+                value={street} 
                 error={error}
+                handleChange={handleChange}
             />
         </div>
         <div className='w-full flex'>
             <div className='w-1/3 px-2'>
                 <InputField 
-                    name={city} 
+                    name={'city'}
                     description={"City"} 
-                    value={''} 
+                    value={city} 
                     error={error}
+                    handleChange={handleChange}
                 />
             </div>
             <div className='w-1/3 px-2'>
                 <InputField 
-                    name={postcode} 
+                    name={'postCode'}
                     description={"Post Code"} 
-                    value={''} 
+                    value={postCode} 
                     error={error}
+                    handleChange={handleChange}
                 />
             </div>
             <div className='w-1/3 px-2'>
                 <InputField 
-                    name={country} 
+                    name={'country'} 
                     description={"Country"} 
-                    value={''} 
+                    value={country} 
                     error={error}
+                    handleChange={handleChange}
                 />
             </div>
         </div>

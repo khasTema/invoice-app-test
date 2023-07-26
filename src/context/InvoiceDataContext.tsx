@@ -90,9 +90,7 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
 
     // form modal
     const handleTogleFormModal = () => {
-        console.log('yay yay')
         setIsFormModalSHown(prev => !prev)
-        console.log(isFormModalShown)
     }
 
     // TEMPORARY FUNCTION chek it later if it is needed and decide what to do

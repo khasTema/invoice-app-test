@@ -4,11 +4,17 @@ interface IinputsProps {
     name: string,
     description: string,
     value: string,
-    error: boolean
+    error: boolean,
+    handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const InputField:React.FC<IinputsProps> = ({name, description, value, error}):JSX.Element => {
-
+export const InputField:React.FC<IinputsProps> = ({
+    name, 
+    description, 
+    value, 
+    error, 
+    handleChange
+}):JSX.Element => {
   return (
     <label 
         htmlFor={name} 
@@ -19,6 +25,7 @@ export const InputField:React.FC<IinputsProps> = ({name, description, value, err
             name={name} 
             value={value}  
             className={`w-full bg-slate-700 py-2 px-3 mt-2 rounded-lg focus:outline-none ${error && 'border border-red-600'}`}
+            onChange={handleChange}
         />
     </label>
   )
