@@ -1,13 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { InputField } from '../InputField'
 import { CURRENCY_SYMBOL } from '../../config/constants'
+import { ReactComponent as Trash } from '../../assets/icon-delete.svg'
+import { Item } from '../../interface/interface'
 
-export const ItemsInput:React.FC = ():JSX.Element => {
+interface IitemsInputProps {
+    itemsArr: Item[]
+    addNewItem: () => void
+    removeItem: (index: number) => void
+}
 
-    const [ itemsCount, setItemsCount ] = useState<number>(1)
+export const ItemsInput:React.FC<IitemsInputProps> = ({itemsArr, addNewItem, removeItem}):JSX.Element => {
+
+    // const [ itemsCount, setItemsCount ] = useState<number>(1)
     const handleAddItemInput = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>):void => {
         e.preventDefault()
-        setItemsCount(prev => prev + 1)
+        addNewItem()
+    }
+    console.log(itemsArr)
+    const handleDeleteItem = (index: number):void => {
+        removeItem(index)
     }
 
   return (
@@ -17,16 +29,17 @@ export const ItemsInput:React.FC = ():JSX.Element => {
             <div className='w-full flex justify-between items-center'>
                 <span className='w-5/12 pl-1'>Item Name</span>
                 <span className='w-2/12 pl-4'>QTY.</span>
-                <span className='w-2/12 pl-3'>Price</span>
-                <span className='w-2/12 pl-5'>Total</span>
+                <span className='w-2/12 pl-1'>Price</span>
+                <span className='w-2/12 pl-4'>Total</span>
+                <span className='w-1/12 pl-5'></span>
             </div>
-            {[...Array(itemsCount)].map((item, index) => (
+            {itemsArr.map((item, index) => (
                 <div key={index} className="items-input w-full flex justify-between items-center">
                     <div className='w-5/12'>
                         <InputField 
                             name='name'
                             description=''
-                            value={''}
+                            value={item.name}
                             error={false}
                         />
                     </div>
@@ -34,7 +47,7 @@ export const ItemsInput:React.FC = ():JSX.Element => {
                         <InputField 
                             name='quantity'
                             description=''
-                            value={''}
+                            value={item.quantity}
                             error={false}
                         />
                     </div>
@@ -42,11 +55,17 @@ export const ItemsInput:React.FC = ():JSX.Element => {
                         <InputField 
                             name='price'
                             description=''
-                            value={''}
+                            value={item.price}
                             error={false}
                         />
                     </div>
-                    <div className='1/12'>{CURRENCY_SYMBOL}{'24.00'}</div>
+                    <div className='w-1/12 text-sm -translate-y-1'>{CURRENCY_SYMBOL}{item.total}</div>
+                    <div 
+                        className='w-1/12 delete-it flex justify-center items-center -translate-y-1.5 cursor-pointer'
+                        onClick={() => handleDeleteItem(index)}
+                    >
+                        <Trash />
+                    </div>
                 </div>
             ))}
             

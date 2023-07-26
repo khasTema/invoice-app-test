@@ -24,10 +24,8 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
         postCode: '',
         country: ''
     })
-    // console.log(senderAddress)
 
     const handleSenderAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // console.log('Sender Address Changed');
         const { name, value } = e.target;
         setSenderAddress((prevAddress) => ({
           ...prevAddress,
@@ -48,10 +46,8 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
         postCode: '',
         country: ''
     })
-    // console.log(clientAddress)
 
     const handleClientAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // console.log('Client Address Changed')
         const { name, value } = e.target;
         setClientAddress((prevAddress) => ({
           ...prevAddress,
@@ -73,11 +69,26 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
     const [ newInvoiceItems, setNewInvoiceItems ] = useState<Item[]>([
         {
             name: '',
-            quantity: parseFloat(''),
-            price: parseFloat(''),
+            quantity: 0,
+            price: 0,
             total: 0 
         }
     ])
+
+    const addNewItem = ():void => {
+        const newItem = {
+            name: '',
+            quantity: 0,
+            price: 0,
+            total: 0 
+        }
+        setNewInvoiceItems([...newInvoiceItems, newItem])
+    }
+
+    const removeItem = (index: number):void => {
+        const updatedItems = newInvoiceItems.filter((_, i) => i !== index);
+        setNewInvoiceItems(updatedItems)
+    }
 
     const [ newInvoiceData, setNewInvoiceData ] = useState<Invoice>({
         id: '',
@@ -93,7 +104,7 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
         items: [],
         total: parseFloat('')
     })
-    // console.log(newInvoiceData)
+
     console.log(newInvoiceData)
 
 
@@ -163,7 +174,11 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
                 />
            </div>
            <div className="px-2">
-            <ItemsInput />
+            <ItemsInput 
+                itemsArr={newInvoiceItems}
+                addNewItem={addNewItem}
+                removeItem={removeItem}
+            />
            </div>
            <FormInvoiceButtons isEditForm={isEditForm} />
          </form>
