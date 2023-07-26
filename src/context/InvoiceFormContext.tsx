@@ -1,52 +1,9 @@
 import { createContext, useState} from "react";
 import { IContextProps, IFormContext } from "./interface";
 import { Address, Invoice, Item } from "../interface/interface";
+import { FormContextDefaults } from "./defaults";
 
-export const InvoiceFormContext = createContext<IFormContext>({
-    senderAddress: {
-            street: '',
-            city: '',
-            postCode: '',
-            country: ''
-        },
-    clientAddress: {
-        street: '',
-        city: '',
-        postCode: '',
-        country: ''
-    },
-    newInvoiceItems: [],
-    newInvoiceData: {
-        id: '',
-        createdAt: '',
-        paymentDue: '',
-        description: '',
-        paymentTerms: 20,
-        clientName: '',
-        clientEmail: '',
-        status: '',
-        senderAddress:  {
-                street: '',
-                city: '',
-                postCode: '',
-                country: ''
-            },
-        clientAddress:  {
-                street: '',
-                city: '',
-                postCode: '',
-                country: ''
-            },
-        items: [],
-        total: 0,
-    },
-    handleSenderAddressChange: () => {},
-    handleClientAddressChange: () => {},
-    handleInvoiceItemsChange: () => {},
-    addNewItem: () => {},
-    removeItem: () => {},
-    handleNewInvoiceDataChange: () => {},
-});
+export const InvoiceFormContext = createContext<IFormContext>(FormContextDefaults);
 
 export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) => {
 

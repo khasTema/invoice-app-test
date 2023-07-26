@@ -1,54 +1,27 @@
-import { createContext, useState, useEffect, useMemo, useContext } from "react";
-import { Invoice } from "../interface/interface";
+import { createContext, useState, useMemo, useContext } from "react";
+import { Invoice} from "../interface/interface";
 import { useNavigate } from "react-router-dom";
-import { PAID, PENDING } from "../config/constants";
+import { DRAFT, PAID, PENDING } from "../config/constants";
 import { IContext, IContextProps } from './interface'
 import { InvoiceFormContext } from "./InvoiceFormContext";
+import { DataContextDefault } from "./defaults";
+import { useInitialData } from "../hooks/useInitialData";
+import { generateRandomID } from "../utils/generateRandomID";
+import { calculateTotalSum } from "../utils/calculateTotalSum";
+import { calculatePaymentDue } from "../utils/calculatePaymentDue";
 
-export const InvoiceDataContext = createContext<IContext>({
-    data : null,
-    filteredData: null,
-    isListShown: false,
-    numberOfInvoices: 0,
-    handleDelete: (invoiceId) => {},
-    isModalShown: false,
-    handleToggleModal: () => {},
-    handleStatusChange: () => {},
-    handleStatusFilter: () => {},
-    handleClearFilter: () => {},
-    isFormModalShown: false,
-    handleTogleFormModal: () => {},
-    handleCloseModalForm: () => {},
-    handleSaveNewInvoice: () => {}
-}) 
+export const InvoiceDataContext = createContext<IContext>(DataContextDefault) 
 
 export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) => {
 
-    const value = useContext(InvoiceFormContext)
-    console.log(value + ' from data context')
-
-    const [ data, setData ] = useState<Invoice[]>([])
+    const {newInvoiceData} = useContext(InvoiceFormContext)
+    
+    const { data, setData, isListShown } = useInitialData()
     const [ filteredData, setFilteredData ] = useState<Invoice[]>([])
-    const [ isListShown, setIsListShown ] = useState<boolean>(false)
     const [ isModalShown, setIsModalShown ] = useState<boolean>(false)
     const [ isFormModalShown, setIsFormModalSHown ] = useState<boolean>(false)
     const navigate = useNavigate()
 
-    // getting initila data
-    useEffect(()=> {
-        const getData = async () =>  {
-            try {
-                const res = await fetch('data/data.json');
-                const json = await res.json()
-                setData(json)
-                setIsListShown(true)
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                setIsListShown(false)
-            }
-        };
-            setTimeout(()=> getData(), 1000)  
-    }, [])
 
     // counting number of invoices
     const numberOfInvoices: number = useMemo(()=> data.length, [data] )
@@ -104,10 +77,16 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         setIsFormModalSHown(false)
     }
 
-    // const getNewInvoiceData = (data)
-
     const handleSaveNewInvoice = ():void => {
-        console.log('saving')
+        const newInvoice = {
+            ...newInvoiceData,
+            id: generateRandomID(),
+            paymentDue: calculatePaymentDue(newInvoiceData.createdAt, newInvoiceData.paymentTerms),
+            status: DRAFT,
+            total: calculateTotalSum(newInvoiceData.items)
+        }
+        setData([newInvoice, ...data])
+        setIsFormModalSHown(false)
     }
 
     return (
