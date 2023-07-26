@@ -1,4 +1,4 @@
-import { Invoice } from "../interface/interface"
+import { Address, Invoice, Item } from "../interface/interface"
 import { ReactNode } from "react"
 
 export interface IContext {
@@ -20,4 +20,17 @@ export interface IContext {
 
 export interface IContextProps {
     children: ReactNode
+}
+
+export interface IFormContext {
+    senderAddress: Address
+    clientAddress: Address
+    newInvoiceItems: Item[]
+    newInvoiceData: Invoice
+    handleSenderAddressChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    handleClientAddressChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    handleInvoiceItemsChange: (index: number, field: string, value: string | number) => void
+    addNewItem: () => void
+    removeItem: (index: number) => void
+    handleNewInvoiceDataChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void
 }

@@ -1,8 +1,9 @@
-import { createContext, useState, useEffect, useMemo } from "react";
+import { createContext, useState, useEffect, useMemo, useContext } from "react";
 import { Invoice } from "../interface/interface";
 import { useNavigate } from "react-router-dom";
 import { PAID, PENDING } from "../config/constants";
 import { IContext, IContextProps } from './interface'
+import { InvoiceFormContext } from "./InvoiceFormContext";
 
 export const InvoiceDataContext = createContext<IContext>({
     data : null,
@@ -22,6 +23,9 @@ export const InvoiceDataContext = createContext<IContext>({
 }) 
 
 export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) => {
+
+    const value = useContext(InvoiceFormContext)
+    console.log(value + ' from data context')
 
     const [ data, setData ] = useState<Invoice[]>([])
     const [ filteredData, setFilteredData ] = useState<Invoice[]>([])
@@ -100,7 +104,7 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         setIsFormModalSHown(false)
     }
 
-    const getNewInvoiceData = (data)
+    // const getNewInvoiceData = (data)
 
     const handleSaveNewInvoice = ():void => {
         console.log('saving')
