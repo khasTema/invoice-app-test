@@ -73,11 +73,21 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
     ])
 
     const handleInvoiceItemsChange = (index: number, field: string, value: string | number): void => {
-        // Update the specific field for the item at the given index
-        // const { value } = event.target;
         const updatedItems = [...newInvoiceItems];
         updatedItems[index] = { ...updatedItems[index], [field]: value };
+        // Calculate the total for the specific item based on quantity and price
+        const item = updatedItems[index];
+        const quantity = parseFloat(item.quantity.toString()); 
+        const price = parseFloat(item.price.toString());
+        const total = quantity * price;
+      
+        updatedItems[index].total = total;
+      
         setNewInvoiceItems(updatedItems);
+        setNewInvoiceData({
+          ...newInvoiceData,
+          items: updatedItems, // Use the updatedItems array to set the items in newInvoiceData
+        });
       };
 
     const addNewItem = ():void => {

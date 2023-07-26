@@ -13,12 +13,11 @@ interface IitemsInputProps {
 
 export const ItemsInput:React.FC<IitemsInputProps> = ({itemsArr, addNewItem, removeItem, handleChange}):JSX.Element => {
 
-    // const [ itemsCount, setItemsCount ] = useState<number>(1)
     const handleAddItemInput = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>):void => {
         e.preventDefault()
         addNewItem()
     }
-    console.log(itemsArr)
+
     const handleDeleteItem = (index: number):void => {
         removeItem(index)
     }
