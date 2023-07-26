@@ -14,7 +14,8 @@ export interface IContext {
     handleClearFilter: () => void,
     isFormModalShown: boolean,
     handleTogleFormModal: () => void,
-    handleCloseModalForm: () => void
+    handleCloseModalForm: () => void,
+    handleSaveNewInvoice: () => void
 }
 
 export interface IContextProps {

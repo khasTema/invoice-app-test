@@ -17,7 +17,8 @@ export const InvoiceDataContext = createContext<IContext>({
     handleClearFilter: () => {},
     isFormModalShown: false,
     handleTogleFormModal: () => {},
-    handleCloseModalForm: () => {}
+    handleCloseModalForm: () => {},
+    handleSaveNewInvoice: () => {}
 }) 
 
 export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) => {
@@ -79,24 +80,30 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
     };
 
     // filtering
-    const handleStatusFilter = (status: string) => {
+    const handleStatusFilter = (status: string):void => {
         const updatedData = [...data].filter(item => item.status === status)
         setFilteredData(updatedData)
     }
 
-    const handleClearFilter = () => {
+    const handleClearFilter = ():void => {
         setFilteredData([])
     }
 
     // form modal
-    const handleTogleFormModal = () => {
+    const handleTogleFormModal = ():void => {
         setIsFormModalSHown(prev => !prev)
     }
 
     // TEMPORARY FUNCTION chek it later if it is needed and decide what to do
     // for now it closes modal when logo is clicked
-    const handleCloseModalForm = () => {
+    const handleCloseModalForm = ():void => {
         setIsFormModalSHown(false)
+    }
+
+    const getNewInvoiceData = (data)
+
+    const handleSaveNewInvoice = ():void => {
+        console.log('saving')
     }
 
     return (
@@ -113,7 +120,8 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
             handleClearFilter,
             isFormModalShown,
             handleTogleFormModal,
-            handleCloseModalForm
+            handleCloseModalForm,
+            handleSaveNewInvoice
         }}>
             { children }
         </InvoiceDataContext.Provider>
