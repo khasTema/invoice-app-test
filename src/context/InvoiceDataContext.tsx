@@ -93,8 +93,15 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         && !!totalCheck)
     }
 
-    const handleSaveNewInvoice = ():void => {
-        if(handleFormFilledCheck()) {
+    const handleUpdateInvoice = (id: string):void => {
+            const updatedData = data.filter(invoice => invoice.id !== id)
+            setData([ newInvoiceData ,...updatedData])
+            handleClearForm();
+            setError(false);
+            setIsFormModalSHown(false);
+    }
+
+    const handleCreateInvoice = (): void => {
             setError(false)
             const newInvoice = {
                 ...newInvoiceData,
@@ -107,8 +114,16 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
             setIsFormModalSHown(false)
             handleClearForm()
             setError(false)
+    }
+
+    const handleSaveNewInvoice = ():void => {
+        if(newInvoiceData.id){
+            handleUpdateInvoice(newInvoiceData.id)
+        } else if(handleFormFilledCheck()) {
+            handleCreateInvoice()
+        } else {
+            setError(true)
         }
-        setError(true)
     }
 
     const handleSaveAsDraft = ():void => {

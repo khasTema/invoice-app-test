@@ -14,7 +14,7 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
     const [ newInvoiceData, setNewInvoiceData ] = useState<Invoice>(FormContextDefaults.newInvoiceData);
 
     const handleEditingForm = useMemo(() => (currentInvoice: Invoice): void => {
-      console.log(currentInvoice);
+      // console.log(currentInvoice);
       setNewInvoiceData(currentInvoice);
       setSenderAddress(currentInvoice.senderAddress)
       setClientAddress(currentInvoice.clientAddress)
