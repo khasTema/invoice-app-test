@@ -9,14 +9,14 @@ import { ModalForm } from '../../components/ModalForm'
 
 export const InvoiceListPage:React.FC = ():JSX.Element => {
 
-  const { isListShown, isFormModalShown } = useContext(InvoiceDataContext)
+  const { isListShown, isFormModalShown, numberOfInvoices } = useContext(InvoiceDataContext)
 
   return (
     <>
       <Wrapper>
           <Head />
           {
-            isListShown ? 
+            isListShown && numberOfInvoices ? 
             <InvoiceList /> 
             : <EmptyPlaceholder />
           }

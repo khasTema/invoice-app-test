@@ -12,12 +12,12 @@ export const Head:React.FC = ():JSX.Element => {
         <div className="head mr-auto">
             <h1 className='s text-4xl font-bold'>Invoices</h1>
             {
-              isListShown ?
+              isListShown && numberOfInvoices ?
               <span>There are {numberOfInvoices} total invoices</span>
               : <span>No invoices</span>
             }
         </div>
-        <Filter />
+        {isListShown && numberOfInvoices ? <Filter /> : ''}
         <ButtonNew/>
     </div>
   )

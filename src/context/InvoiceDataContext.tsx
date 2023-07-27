@@ -17,10 +17,12 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
     const {newInvoiceData, handleClearForm} = useContext(InvoiceFormContext)
     
     const { data, setData, isListShown } = useInitialData()
+    
     const [ filteredData, setFilteredData ] = useState<Invoice[]>([])
     const [ isModalShown, setIsModalShown ] = useState<boolean>(false)
     const [ isFormModalShown, setIsFormModalSHown ] = useState<boolean>(false)
     const [ error, setError ] = useState<boolean>(false)
+
     const navigate = useNavigate()
 
 
@@ -73,8 +75,7 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         setError(false)
     }
 
-    // TEMPORARY FUNCTION chek it later if it is needed and decide what to do
-    // for now it closes modal when logo is clicked
+    // closes modal when logo is clicked
     const handleCloseModalForm = ():void => {
         setIsFormModalSHown(false)
         setError(false)
@@ -95,7 +96,13 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
 
     const handleUpdateInvoice = (id: string):void => {
             const updatedData = data.filter(invoice => invoice.id !== id)
-            setData([ newInvoiceData ,...updatedData])
+            // if(newInvoiceData.status === DRAFT && n)
+            const updatedItem = {
+                ...newInvoiceData,
+                total: calculateTotalSum(newInvoiceData.items),
+                status: newInvoiceData.status === DRAFT && calculateTotalSum(newInvoiceData.items) ? PENDING : DRAFT
+            }
+            setData([ updatedItem ,...updatedData])
             handleClearForm();
             setError(false);
             setIsFormModalSHown(false);
