@@ -28,11 +28,15 @@ export const InvoiceDetailsGrid:React.FC<InvoiceViewProps> = ({currentInvoice}):
         </div>
         <div className={styles.invoiceDate}>
             <span>Invoice Date</span>
-            <p>{formatedCreateDate}</p>
+            <p>
+                {createdAt ? formatedCreateDate : 'to be defined'}
+            </p>
         </div>
         <div className={styles.invoiceDueDate}>
             <span>Payment Date</span>
-            <p>{formatedDueDate}</p>
+            <p>
+                {createdAt ? formatedDueDate : 'tobe defined'}
+            </p>
         </div>
         <div className={styles.client}>
             <span>Bill to</span>

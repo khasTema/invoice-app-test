@@ -12,7 +12,9 @@ export const DataContextDefault = {
     isFormModalShown: false,
     handleTogleFormModal: () => {},
     handleCloseModalForm: () => {},
-    handleSaveNewInvoice: () => {}
+    handleSaveNewInvoice: () => {},
+    handleSaveAsDraft: () => {},
+    error: false
 }
 
 export const FormContextDefaults = {

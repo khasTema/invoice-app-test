@@ -15,7 +15,9 @@ export interface IContext {
     isFormModalShown: boolean,
     handleTogleFormModal: () => void,
     handleCloseModalForm: () => void,
-    handleSaveNewInvoice: () => void
+    handleSaveNewInvoice: () => void,
+    handleSaveAsDraft: () => void,
+    error: boolean
 }
 
 export interface IContextProps {

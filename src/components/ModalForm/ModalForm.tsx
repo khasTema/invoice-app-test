@@ -7,8 +7,8 @@ import { DatePicker } from '../DatePicker'
 import { ItemsInput } from '../ItemsInput'
 import { FormInvoiceButtons } from './FormInvoiceButtons'
 import { InvoiceFormContext } from '../../context/InvoiceFormContext'
-
-// import { Invoice, Address, Item } from '../../interface/interface'
+import { InvoiceDataContext } from '../../context/InvoiceDataContext'
+import { Warning } from '../Warning'
 
 export interface IModalFormProps {
     invoiceId?: string
@@ -16,8 +16,10 @@ export interface IModalFormProps {
 
 export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => {
 
+    const { error } = useContext(InvoiceDataContext)
+
     const isEditForm: boolean = !!invoiceId 
-    const error: boolean = false
+    // const error: boolean = true
 
     const {
         senderAddress,
@@ -99,6 +101,7 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
            </div>
            <FormInvoiceButtons isEditForm={isEditForm} />
          </form>
+        { error && <Warning /> }
     </div>
   )
 }

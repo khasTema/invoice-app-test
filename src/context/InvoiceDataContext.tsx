@@ -20,6 +20,7 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
     const [ filteredData, setFilteredData ] = useState<Invoice[]>([])
     const [ isModalShown, setIsModalShown ] = useState<boolean>(false)
     const [ isFormModalShown, setIsFormModalSHown ] = useState<boolean>(false)
+    const [ error, setError ] = useState<boolean>(false)
     const navigate = useNavigate()
 
 
@@ -77,15 +78,41 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         setIsFormModalSHown(false)
     }
 
+    const handleFormFilledCheck = (): boolean => {
+        const totalCheck = calculateTotalSum(newInvoiceData.items)
+        return (!!newInvoiceData.clientName 
+        && !!newInvoiceData.clientEmail
+        && !!newInvoiceData.createdAt
+        && !!newInvoiceData.description
+        && !!newInvoiceData.clientAddress.street
+        && !!newInvoiceData.clientAddress.city
+        && !!newInvoiceData.senderAddress.street
+        && !!totalCheck)
+    }
+
     const handleSaveNewInvoice = ():void => {
-        const newInvoice = {
+        if(handleFormFilledCheck()) {
+            setError(false)
+            const newInvoice = {
+                ...newInvoiceData,
+                id: newInvoiceData.id || generateRandomID(), //if no id it will create new
+                paymentDue: calculatePaymentDue(newInvoiceData.createdAt, newInvoiceData.paymentTerms),
+                status: PENDING,
+                total: calculateTotalSum(newInvoiceData.items)
+            }
+            setData([newInvoice, ...data])
+            setIsFormModalSHown(false)
+        }
+        setError(true)
+    }
+
+    const handleSaveAsDraft = ():void => {
+        const draftInvoice = {
             ...newInvoiceData,
             id: generateRandomID(),
-            paymentDue: calculatePaymentDue(newInvoiceData.createdAt, newInvoiceData.paymentTerms),
-            status: DRAFT,
-            total: calculateTotalSum(newInvoiceData.items)
+            status: DRAFT
         }
-        setData([newInvoice, ...data])
+        setData([draftInvoice, ...data])
         setIsFormModalSHown(false)
     }
 
@@ -104,7 +131,9 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
             isFormModalShown,
             handleTogleFormModal,
             handleCloseModalForm,
-            handleSaveNewInvoice
+            handleSaveNewInvoice,
+            handleSaveAsDraft,
+            error
         }}>
             { children }
         </InvoiceDataContext.Provider>

@@ -18,13 +18,17 @@ export const InvoiceBlock:React.FC<InvoiceBlockProps> = ({invoice}):JSX.Element 
             <span className='font-bold tracking-wider'>{id}</span>
         </span>
         <div className="invoice-due-date text-xs">
-            Due {dueDate}
+            { paymentDue ?  `Due ${dueDate}` : `to be defined`}
         </div>
         <div className="invoice-name">
             {clientName}
         </div>
         <div className="invoice-ammount font-bold tracking-wider self-center place-self-end pr-8">
-            {CURRENCY_SYMBOL}{total.toFixed(2)}
+            {
+                total ?
+                `${CURRENCY_SYMBOL} ${total.toFixed(2)}`
+                : `${CURRENCY_SYMBOL} 00.00`
+            }
         </div>
         <StatusBadge status={status}/>
         <div className='absolute right-3'>

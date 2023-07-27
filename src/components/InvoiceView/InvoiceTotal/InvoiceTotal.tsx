@@ -9,7 +9,13 @@ export const InvoiceTotal:React.FC<InvoiceViewProps> = ({currentInvoice}):JSX.El
   return (
     <div className='w-full flex justify-between items-center p-8 bg-black rounded-b-2xl'>
         <span className='text-sm'>Amount Due</span>
-        <p className='text-2xl font-bold'>{CURRENCY_SYMBOL} {total.toFixed(2)}</p>
+        <p className='text-2xl font-bold'>
+          {
+            total ?
+            `${CURRENCY_SYMBOL} ${total.toFixed(2)}`
+            : `${CURRENCY_SYMBOL} 00.00`
+          }
+        </p>
     </div>
   )
 }
