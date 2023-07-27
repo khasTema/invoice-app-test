@@ -14,7 +14,7 @@ export const InvoiceDataContext = createContext<IContext>(DataContextDefault)
 
 export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) => {
 
-    const {newInvoiceData} = useContext(InvoiceFormContext)
+    const {newInvoiceData, handleClearForm} = useContext(InvoiceFormContext)
     
     const { data, setData, isListShown } = useInitialData()
     const [ filteredData, setFilteredData ] = useState<Invoice[]>([])
@@ -70,12 +70,15 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
     // form modal
     const handleTogleFormModal = ():void => {
         setIsFormModalSHown(prev => !prev)
+        setError(false)
     }
 
     // TEMPORARY FUNCTION chek it later if it is needed and decide what to do
     // for now it closes modal when logo is clicked
     const handleCloseModalForm = ():void => {
         setIsFormModalSHown(false)
+        setError(false)
+        handleClearForm()
     }
 
     const handleFormFilledCheck = (): boolean => {
@@ -102,6 +105,8 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
             }
             setData([newInvoice, ...data])
             setIsFormModalSHown(false)
+            handleClearForm()
+            setError(false)
         }
         setError(true)
     }
@@ -114,6 +119,7 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         }
         setData([draftInvoice, ...data])
         setIsFormModalSHown(false)
+        handleClearForm()
     }
 
     return (

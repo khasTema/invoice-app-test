@@ -30,7 +30,14 @@ export const FormContextDefaults = {
         postCode: '',
         country: ''
     },
-    newInvoiceItems: [],
+    newInvoiceItems: [
+        {
+            name: '',
+            quantity: 0,
+            price: 0,
+            total: 0 
+        }
+    ],
     newInvoiceData: {
         id: '',
         createdAt: '',
@@ -61,5 +68,6 @@ export const FormContextDefaults = {
     addNewItem: () => {},
     removeItem: () => {},
     handleNewInvoiceDataChange: () => {},
-    handleEditingForm: () => {}
+    handleEditingForm: () => {},
+    handleClearForm: () => {}
 }

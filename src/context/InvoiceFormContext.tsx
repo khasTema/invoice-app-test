@@ -3,16 +3,19 @@ import { IContextProps, IFormContext } from "./interface";
 import { Address, Invoice, Item } from "../interface/interface";
 import { FormContextDefaults } from "./defaults";
 
+
 export const InvoiceFormContext = createContext<IFormContext>(FormContextDefaults);
 
 export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) => {
 
-    const [ senderAddress, setSenderAddress ] = useState<Address>({
-        street: '',
-        city: '',
-        postCode: '',
-        country: ''
-    });
+  const handleEditingForm = (id: string | undefined):void => {
+      console.log(id)
+  }
+
+    const [ senderAddress, setSenderAddress ] = useState<Address>(FormContextDefaults.senderAddress);
+    const [ clientAddress, setClientAddress ] = useState<Address>(FormContextDefaults.clientAddress);
+    const [ newInvoiceItems, setNewInvoiceItems ] = useState<Item[]>(FormContextDefaults.newInvoiceItems);
+    const [ newInvoiceData, setNewInvoiceData ] = useState<Invoice>(FormContextDefaults.newInvoiceData);
 
     const handleSenderAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -29,13 +32,6 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
           }));
       };
 
-    const [ clientAddress, setClientAddress ] = useState<Address>({
-        street: '',
-        city: '',
-        postCode: '',
-        country: ''
-    });
-
     const handleClientAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setClientAddress((prevAddress) => ({
@@ -50,16 +46,6 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
             }
           }));
       };
-
-
-    const [ newInvoiceItems, setNewInvoiceItems ] = useState<Item[]>([
-        {
-            name: '',
-            quantity: 0,
-            price: 0,
-            total: 0 
-        }
-    ]);
 
     const handleInvoiceItemsChange = (index: number, field: string, value: string | number): void => {
         const updatedItems = [...newInvoiceItems];
@@ -94,21 +80,6 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
         setNewInvoiceItems(updatedItems)
     };
 
-    const [ newInvoiceData, setNewInvoiceData ] = useState<Invoice>({
-        id: '',
-        createdAt: '',
-        paymentDue: '',
-        description: '',
-        paymentTerms: 20,
-        clientName: '',
-        clientEmail: '',
-        status: '',
-        senderAddress: senderAddress,
-        clientAddress: clientAddress,
-        items: [],
-        total: parseFloat('')
-    });
-
     const handleNewInvoiceDataChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>):void => {
         const { name, value } = e.target;
         setNewInvoiceData((prevData) => ({
@@ -117,12 +88,12 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
         }));
       };
 
-      // if existing invice set to editing it
-      const handleEditingForm = (currentInvoice: Invoice):void => {
-        console.log('from form context')
-        console.log(currentInvoice)
-    }
-
+      const handleClearForm = (): void => {
+        setSenderAddress(FormContextDefaults.senderAddress);
+        setClientAddress(FormContextDefaults.clientAddress);
+        setNewInvoiceItems(FormContextDefaults.newInvoiceItems);
+        setNewInvoiceData(FormContextDefaults.newInvoiceData);
+      }
 
     return(
         <InvoiceFormContext.Provider value={{
@@ -136,9 +107,10 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
             addNewItem,
             removeItem,
             handleNewInvoiceDataChange,
-            handleEditingForm
+            handleEditingForm,
+            handleClearForm
         }}>
-            {  children}
+            { children }
         </InvoiceFormContext.Provider>
     )
 } 
