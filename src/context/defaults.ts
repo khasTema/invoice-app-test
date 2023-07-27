@@ -61,4 +61,5 @@ export const FormContextDefaults = {
     addNewItem: () => {},
     removeItem: () => {},
     handleNewInvoiceDataChange: () => {},
+    handleEditingForm: () => {}
 }

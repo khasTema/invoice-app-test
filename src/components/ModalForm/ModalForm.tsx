@@ -9,6 +9,7 @@ import { FormInvoiceButtons } from './FormInvoiceButtons'
 import { InvoiceFormContext } from '../../context/InvoiceFormContext'
 import { InvoiceDataContext } from '../../context/InvoiceDataContext'
 import { Warning } from '../Warning'
+import { useCurrentInvoice } from '../../hooks/useCurrentInvoice'
 
 export interface IModalFormProps {
     invoiceId?: string
@@ -17,9 +18,10 @@ export interface IModalFormProps {
 export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => {
 
     const { error } = useContext(InvoiceDataContext)
+    const { currentInvoice } = useCurrentInvoice({ id: invoiceId})
+    
 
     const isEditForm: boolean = !!invoiceId 
-    // const error: boolean = true
 
     const {
         senderAddress,
@@ -32,9 +34,12 @@ export const ModalForm:React.FC<IModalFormProps> = ({invoiceId}):JSX.Element => 
         addNewItem,
         removeItem,
         handleNewInvoiceDataChange,
+        handleEditingForm
     } = useContext(InvoiceFormContext)
 
-    
+    if(isEditForm && currentInvoice) {
+        handleEditingForm(currentInvoice)
+    }
 
   return (
     <div className='fixed top-0 left-20 w-full h-screen bg-black bg-opacity-60 flex justify-start items-start overflow-y-scroll overflow-x-hidden'>

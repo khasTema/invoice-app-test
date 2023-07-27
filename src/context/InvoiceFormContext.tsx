@@ -117,6 +117,12 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
         }));
       };
 
+      // if existing invice set to editing it
+      const handleEditingForm = (currentInvoice: Invoice):void => {
+        console.log('from form context')
+        console.log(currentInvoice)
+    }
+
 
     return(
         <InvoiceFormContext.Provider value={{
@@ -130,6 +136,7 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
             addNewItem,
             removeItem,
             handleNewInvoiceDataChange,
+            handleEditingForm
         }}>
             {  children}
         </InvoiceFormContext.Provider>
