@@ -35,6 +35,6 @@ export interface IFormContext {
     addNewItem: () => void
     removeItem: (index: number) => void
     handleNewInvoiceDataChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void
-    handleEditingForm: (id: string | undefined) => void
+    handleEditingForm: (currentInvoice : Invoice) => void
     handleClearForm: () => void
 }

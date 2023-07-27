@@ -115,6 +115,7 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         const draftInvoice = {
             ...newInvoiceData,
             id: generateRandomID(),
+            total: calculateTotalSum(newInvoiceData.items),
             status: DRAFT
         }
         setData([draftInvoice, ...data])

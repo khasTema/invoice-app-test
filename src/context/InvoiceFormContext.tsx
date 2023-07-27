@@ -1,4 +1,4 @@
-import { createContext, useState} from "react";
+import { createContext, useMemo, useState} from "react";
 import { IContextProps, IFormContext } from "./interface";
 import { Address, Invoice, Item } from "../interface/interface";
 import { FormContextDefaults } from "./defaults";
@@ -8,14 +8,18 @@ export const InvoiceFormContext = createContext<IFormContext>(FormContextDefault
 
 export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) => {
 
-  const handleEditingForm = (id: string | undefined):void => {
-      console.log(id)
-  }
-
     const [ senderAddress, setSenderAddress ] = useState<Address>(FormContextDefaults.senderAddress);
     const [ clientAddress, setClientAddress ] = useState<Address>(FormContextDefaults.clientAddress);
     const [ newInvoiceItems, setNewInvoiceItems ] = useState<Item[]>(FormContextDefaults.newInvoiceItems);
     const [ newInvoiceData, setNewInvoiceData ] = useState<Invoice>(FormContextDefaults.newInvoiceData);
+
+    const handleEditingForm = useMemo(() => (currentInvoice: Invoice): void => {
+      console.log(currentInvoice);
+      setNewInvoiceData(currentInvoice);
+      setSenderAddress(currentInvoice.senderAddress)
+      setClientAddress(currentInvoice.clientAddress)
+      setNewInvoiceItems(currentInvoice.items)
+  }, []);
 
     const handleSenderAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -66,13 +70,7 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
       };
 
     const addNewItem = ():void => {
-        const newItem = {
-            name: '',
-            quantity: 0,
-            price: 0,
-            total: 0 
-        }
-        setNewInvoiceItems([...newInvoiceItems, newItem])
+        setNewInvoiceItems([...newInvoiceItems, FormContextDefaults.newInvoiceItems[0]])
     };
 
     const removeItem = (index: number):void => {
