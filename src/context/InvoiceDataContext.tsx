@@ -96,7 +96,6 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
 
     const handleUpdateInvoice = (id: string):void => {
             const updatedData = data.filter(invoice => invoice.id !== id)
-            // if(newInvoiceData.status === DRAFT && n)
             const updatedItem = {
                 ...newInvoiceData,
                 total: calculateTotalSum(newInvoiceData.items),
