@@ -95,16 +95,19 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
     }
 
     const handleUpdateInvoice = (id: string):void => {
+        if(handleFormFilledCheck()) {
             const updatedData = data.filter(invoice => invoice.id !== id)
             const updatedItem = {
                 ...newInvoiceData,
                 total: calculateTotalSum(newInvoiceData.items),
-                status: newInvoiceData.status === DRAFT && calculateTotalSum(newInvoiceData.items) ? PENDING : DRAFT
+                status: calculateTotalSum(newInvoiceData.items) ? PENDING : DRAFT
             }
             setData([ updatedItem ,...updatedData])
             handleClearForm();
             setError(false);
             setIsFormModalSHown(false);
+        }
+        setError(true)
     }
 
     const handleCreateInvoice = (): void => {
