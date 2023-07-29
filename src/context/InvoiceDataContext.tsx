@@ -100,6 +100,7 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
             const updatedItem = {
                 ...newInvoiceData,
                 total: calculateTotalSum(newInvoiceData.items),
+                paymentDue: calculatePaymentDue(newInvoiceData.createdAt, newInvoiceData.paymentTerms),
                 status: calculateTotalSum(newInvoiceData.items) ? PENDING : DRAFT
             }
             setData([ updatedItem ,...updatedData])
@@ -140,6 +141,7 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
             ...newInvoiceData,
             id: generateRandomID(),
             total: calculateTotalSum(newInvoiceData.items),
+            paymentDue: calculatePaymentDue(newInvoiceData.createdAt, newInvoiceData.paymentTerms),
             status: DRAFT
         }
         setData([draftInvoice, ...data])
