@@ -24,7 +24,16 @@ export const InputField:React.FC<IinputsProps> = ({
             type="text" 
             name={name} 
             value={value}  
-            className={`w-full bg-slate-700 py-2 px-3 mt-2 rounded-lg focus:outline-none ${error && 'border border-red-600'}`}
+            className={`
+                w-full 
+                bg-slate-700 
+                py-2 
+                px-3 
+                mt-2 
+                rounded-lg 
+                focus:outline-none 
+                ${(!value && error) && 'border border-red-600'}
+                `}
             onChange={handleChange}
         />
     </label>

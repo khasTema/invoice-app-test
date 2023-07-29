@@ -13,12 +13,13 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
     const [ newInvoiceItems, setNewInvoiceItems ] = useState<Item[]>(FormContextDefaults.newInvoiceItems);
     const [ newInvoiceData, setNewInvoiceData ] = useState<Invoice>(FormContextDefaults.newInvoiceData);
 
+    // this function will run only when modal with form fired from invoce view page
     const handleEditingForm = useMemo(() => (currentInvoice: Invoice): void => {
       setNewInvoiceData(currentInvoice);
       setSenderAddress(currentInvoice.senderAddress)
       setClientAddress(currentInvoice.clientAddress)
       setNewInvoiceItems(currentInvoice.items)
-  }, []);
+  }, []); 
 
     const handleSenderAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
