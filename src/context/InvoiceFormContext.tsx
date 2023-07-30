@@ -18,7 +18,7 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
       setNewInvoiceData(currentInvoice);
       setSenderAddress(currentInvoice.senderAddress)
       setClientAddress(currentInvoice.clientAddress)
-      setNewInvoiceItems(currentInvoice.items)
+      setNewInvoiceItems([...currentInvoice.items, FormContextDefaults.newInvoiceItems[0]])
   }, []); 
 
     const handleSenderAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +76,10 @@ export const InvoiceFormContextProvider:React.FC<IContextProps> = ({children}) =
     const removeItem = (index: number):void => {
         const updatedItems = newInvoiceItems.filter((_, i) => i !== index);
         setNewInvoiceItems(updatedItems)
+        setNewInvoiceData({
+          ...newInvoiceData,
+          items: updatedItems, 
+        });
     };
 
     const handleNewInvoiceDataChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>):void => {

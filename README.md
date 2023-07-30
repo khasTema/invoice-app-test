@@ -1,56 +1,24 @@
-### Objective
+### Invoicing Application - README
 
-Your challenge is to build out this invoicing application for PayEm's accounting department and get it looking as close to the design as possible.
+## Brief
 
-### Brief
+I have successfully implemented the application using TypeScript and React, adhering to the design files provided in the /designs folder. While I strived to achieve pixel-perfection, my primary focus was on ensuring the functionality meets the requirements outlined in the Expected Behaviour section. I have thoroughly tested the application to ensure it behaves in a sensible and thought-out manner.
 
-Using TypeScript and React, your task is to build out the project to the design files provided in the `/designs` folder. The functionality outlined in **Expected Behaviour** is more important than implementing the designs pixel-perfect. You are only supposed to build out the desktop version of the assignment and it does not need to be responsive.
+## Key Points:
 
-All the required assets for this project are in the `/assets` folder. The assets are already exported for the correct screen size and optimized. Some images are reusable at multiple screen sizes. So if you don't see an image in a specific folder, it will typically be in another folder for that page.
+- All functionality, including creating, reading, updating, and deleting invoices, is working as expected.
+- I have generated unique IDs for each new invoice in the format of 2 random uppercased letters followed by 4 random numbers.
+- Users can create invoices as drafts or pending. Clicking "Save as Draft" allows leaving form fields blank, while clicking "Save & Send" requires all fields to be filled and sets the status to "pending."
+- The paymentDue property updates based on the createdAt date plus the specified payment terms.
+- The total field correctly displays the sum of all items on the invoice.
+- During invoice editing, all fields are required when saving changes, and clicking "Cancel" resets any unsaved changes.
+If editing a "draft" invoice, the status updates to "pending" when clicking "Save Changes."
+- Users can mark invoices as paid using the "Mark as Paid" button, changing the status to "paid."
+- I also have considered implementing a confirmation modal when attempting to delete invoices.
 
-The design system file will give you more information about the various colors, fonts, and styles used in this project.
+While I have covered a significant volume of tasks, I acknowledge that there could be further improvements, such as adding more input validation, refactoring to reduce repeated code, and enhancing the overall user experience. I attempted to utilize Tailwind CSS for styling to streamline the design process.
 
-We provide the data in a local `data.json` file, so use that to populate the content on first load.
+I thoroughly enjoyed working on this project and appreciate the opportunity to showcase my skills as a Frontend Developer. I kindly request proper feedback and review of my work to help me grow and learn from this experience.
 
-### Tasks
+# Thank you once again for considering my candidacy for the Frontend Developer role in your esteemed company. I look forward to hearing from you soon.
 
-- Implement assignment using:
-  - Language: **TypeScript**
-  - Framework: **React**
-
-Your users should be able to:
-
-- See hover states for all interactive elements on the page
-- Create, read, update, and delete invoices
-
-### Expected Behaviour
-
-- Creating an invoice
-  - When creating a new invoice, an ID needs to be created. Each ID should be 2 random uppercased letters followed by 4 random numbers.
-  - Invoices can be created either as drafts or as pending. Clicking "Save as Draft" should allow the user to leave any form field blank but should create an ID if one doesn't exist and set the status to "draft". Clicking "Save & Send" should require all forms fields to be filled in, and should set the status to "pending".
-  - Changing the Payments Terms field should set the `paymentDue` property based on the `createdAt` date plus the numbers of days set for the payment terms.
-  - The `total` should be the sum of all items on the invoice.
-- Editing an invoice
-  - When saving changes to an invoice, all fields are required when the "Save Changes" button is clicked. If the user clicks "Cancel", any unsaved changes should be reset.
-  - If the invoice being edited is a "draft", the status needs to be updated to "pending" when the "Save Changes" button is clicked. All fields are required at this stage.
-- Users should be able to mark invoices as paid by clicking the "Mark as Paid" button. This should change the invoice's status to "paid".
-- **Bonus**: Users should receive a confirmation modal when trying to delete invoices.
-- Feel free not to add custom styling for the date and dropdown form fields. The designs for those fields are optional extras and are mostly for illustration purposes.
-
-### Evaluation Criteria
-
-- **TypeScript** best practices
-- Show us your work through your commit history
-- We're looking for you to produce working code with enough room to demonstrate how to structure components in a small program
-- Completeness: did you complete the features?
-- Correctness: does the functionality act in sensible, thought-out ways?
-- Maintainability: is it written in a clean, maintainable way?
-- Testing: is the system adequately tested?
-
-### CodeSubmit
-
-Please organize, design, test, and document your code as if it were going into production - then push your changes to the master branch. After you have pushed your code, you may submit the assignment on the assignment page.
-
-**Have fun building!** 🚀
-
-The PayEm Team
