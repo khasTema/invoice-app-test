@@ -149,6 +149,16 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
         handleClearForm()
     }
 
+    const [searchBar, setSearchBar] = useState<string>('')
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>):void => {
+        setSearchBar(e.target.value)
+        const updatedData = data.filter(item => item.clientName.toLowerCase().includes(searchBar))
+        setFilteredData(updatedData)
+    } 
+
+    
+
     return (
         <InvoiceDataContext.Provider value={{
             data,
@@ -166,7 +176,10 @@ export const InvoiceDataContextProvider:React.FC<IContextProps> = ({children}) =
             handleCloseModalForm,
             handleSaveNewInvoice,
             handleSaveAsDraft,
-            error
+            error,
+            handleSearch,
+            searchBar
+
         }}>
             { children }
         </InvoiceDataContext.Provider>

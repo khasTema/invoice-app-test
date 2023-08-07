@@ -14,7 +14,9 @@ export const DataContextDefault = {
     handleCloseModalForm: () => {},
     handleSaveNewInvoice: () => {},
     handleSaveAsDraft: () => {},
-    error: false
+    error: false,
+    handleSearch: () => {},
+    searchBar: ''
 }
 
 export const FormContextDefaults = {

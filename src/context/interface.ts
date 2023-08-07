@@ -17,7 +17,9 @@ export interface IContext {
     handleCloseModalForm: () => void,
     handleSaveNewInvoice: () => void,
     handleSaveAsDraft: () => void,
-    error: boolean
+    error: boolean,
+    handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    searchBar: string
 }
 
 export interface IContextProps {
