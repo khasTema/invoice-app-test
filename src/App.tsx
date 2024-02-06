@@ -10,7 +10,7 @@ import { InvoiceFormContextProvider } from './context/InvoiceFormContext';
 export const App: React.FC = ():JSX.Element => {
 
   return (
-    <div className="App bg-gray-950 w-full flex justify-start items-start relative overflow-x-hidden">
+    <div className="App h-screen bg-gray-950 w-full flex justify-start items-start relative overflow-x-hidden">
       <InvoiceFormContextProvider>
         <InvoiceDataContextProvider>
           <Aside />
